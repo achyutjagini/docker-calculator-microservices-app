@@ -10,6 +10,7 @@ services:
             sample:
                 aliases:
                     - landing-service
+                    
     # Add more services below
     addition-service:
         build: ./addition
@@ -20,6 +21,7 @@ services:
             sample:
                 aliases:
                     - addition-service
+
     subtraction-service:
         build: ./subtraction
         hostname: subtraction-service
@@ -29,6 +31,7 @@ services:
             sample:
                 aliases:
                     - subtraction-service
+
     multiplication-service:
         build: ./multiplication
         hostname: multiplication-service
@@ -38,6 +41,7 @@ services:
             sample:
                 aliases:
                     - multiplication-service  
+                    
     division-service:
         build: ./division
         hostname: division-service

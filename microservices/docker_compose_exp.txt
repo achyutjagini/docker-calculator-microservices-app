@@ -1,0 +1,31 @@
+
+This is a configuration in a docker-compose.yml file,
+ specifying how to build and run a container for a service
+  called "landing-service".
+
+The services key specifies the different services that make up your
+ application. In this case, there's a single service called "landing-service".
+
+The build key is used to specify the build context and the Dockerfile
+ location, in this case it's set to ./landing which is relative to the
+  location of the docker-compose.yml file.
+
+The hostname key is used to specify the hostname that will be assigned 
+to the service. In this case, it is set to landing-service, this hostname
+ will be used to refer to this service from other services in this compose file.
+
+The ports key is used to publish the service container's port to the host.
+ In this case, it is set to 5050:5050, mapping the container's port 5050 
+ to the host's port 5050. This means that any traffic sent to the host's port 5050 will be forwarded to the service container's port 5050.
+
+The networks key is used to specify the networks that the service
+ should be connected to. In this case, it is connected to the sample network.
+
+Under the networks key, the aliases key is used to specify an alias 
+for the service that can be used instead of the service name. In this
+ case, the alias is set to landing-service
+
+This configuration tells Docker Compose to build the service using 
+the Dockerfile located in the ./landing directory and the service
+ will be hosted at landing-service:5050, it will be connected to 
+ sample network and will also be accessible with the alias landing-service

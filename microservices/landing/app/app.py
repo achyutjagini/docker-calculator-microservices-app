@@ -1,14 +1,22 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 
-
 import requests
-import os
+
 
 app = Flask(__name__)
 app.secret_key = 'thisisjustarandomstring'
 
 # URL = 'http://landing-service:'
 
+#addition-service is name of hostname  in docker compose file to get url
+
+#The line of code return response.json()['result'] is using the json() method to 
+#parse the response's content as JSON and then accessing the result key of that
+# JSON object to return its value.
+
+#This is assuming that the external service is returning a JSON object with a key 
+#result that contains the result of the addition operation. The json() method 
+#converts the json data returned in the response into a python dictionary.
 
 def add(n1, n2):
     URL = 'http://addition-service:'
@@ -71,6 +79,7 @@ def equal(n1, n2):
     port = 5057
     add_url = URL + str(port) + '/' + str(n1) + '/' + str(n2)
     response = requests.get(add_url)
+    
     print(response)
     return response.json()['result']
     # return n1==n2
@@ -114,14 +123,18 @@ def index():
     try:
         number_1 = int(request.form.get("first"))
         number_2 = int(request.form.get('second'))
+
         operation = request.form.get('operation')
         result = 0
+
         if operation == 'add':
             result = add(number_1, number_2)
+
         elif operation == 'minus':
             result = minus(number_1, number_2)
         elif operation == 'multiply':
             result = multiply(number_1, number_2)
+
         elif operation == 'divide':
             if number_2==0:
                         result = 'Zero Division Error'
@@ -154,8 +167,10 @@ def index():
         flash(f'The result of operation {operation} on {number_1} and {number_2} is {result}')
 
         return render_template('index.html')
+
     except:
         flash(f'No input value')
+
         return render_template('index.html')
 
 

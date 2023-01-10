@@ -1,0 +1,81 @@
+
+This code creates a Flask application and sets up a RESTful API using Flask-RESTful. 
+It defines a single route, '/<num1>/<num2>', which is handled by the Addition resource.
+The Addition resource defines a GET method which expects two numerical arguments,
+ num1 and num2, and returns the sum of these two numbers as a JSON object.
+
+
+The application is run in debug mode, listening on all available interfaces
+ on port 5051. When you send a GET request to the API with two numerical arguments,
+  the server will return the sum of these two numbers as a JSON object.
+
+For example, if you send a GET request to http://0.0.0.0:5051/10/20,
+ the server will return the following JSON object:
+
+{"result": 30}
+
+You can also test this API using a tool like curl or by using a web browser.
+
+
+
+app = Flask(__name__)
+api = Api(app)
+api.add_resource(Addition, '/<num1>/<num2>')
+
+
+
+This code creates a new Flask application, app, and an API object, api, 
+that is bound to the application. The Api class is provided by the Flask-RESTful 
+library and is used to create a RESTful API.
+
+
+Then, the api.add_resource() method is used to register the Addition resource
+with the API. 
+The first argument is the resource class, and the second argument 
+ is the route that the resource should be associated with. 
+
+The route specified,'/<num1>/<num2>', has two parameters, num1 and num2, which are used to
+capture the value of the two path variables, respectively. In this case, 
+the route is defined as /<num1>/<num2> which maps to the class Addition 
+and the get method of it, which is called when the API receives a GET request
+and returns the sum of the two variables as a json object.
+
+When a client sends a GET request to the specified route and includes two
+ numerical values in the path, the Addition.get() method will be called 
+ with the values of num1 and num2 as the arguments. The method will then
+  return a JSON object containing the sum of num1 and num2.
+
+The method uses int() function to convert the value of the path 
+variables from strings to integers, this allows the method to
+ perform arithmetic operation on them.
+
+
+
+Resource is a class provided by the Flask-RESTful library, which is used to define 
+the individual resources that make up the API. A resource represents a specific 
+endpoint in the API and defines the methods (such as GET, POST, PUT, etc.)
+hat can be called on that endpoint.
+
+
+The Addition class in the code you posted inherits from Resource and defines
+a get() method that handles GET requests to the endpoint. The get()
+method takes two arguments, num1 and num2, and returns a JSON object
+containing the sum of the two numbers as the result key.
+
+
+The Resource class provides the basic methods for handling HTTP 
+requests and responses, such as get(), post(), put(), and delete(). 
+
+**You can override these methods to handle the corresponding HTTP verbs
+for a specific resource.
+
+
+When you register a resource with the API by calling 
+api.add_resource(Addition, '/<num1>/<num2>'), Flask-RESTful
+uses the Resource class to define the methods and behavior
+of the resource and map them to the appropriate route.
+
+
+This way, when a client sends a GET request to the specified
+route, the get() method of the Addition resource class is called,
+and it returns the result of the addition as a JSON object
